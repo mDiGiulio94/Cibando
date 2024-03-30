@@ -1,6 +1,6 @@
-// La best practice delle VARIABILI DI STATO, questo concetto è un pilastro di react, le variabili di stato, ed è gestito dall'hook useState
+// La best practice delle VARIABILI DI STATO: questo concetto è un pilastro di react, ed è gestito dall'hook useState
 
-// react nelle ultime versioni è passato da componenti con le classi, a componenti funzionali, ovvero componenti che sono delle funzioni, oltrea questo passaggio sono stati introdotti gli HOOKS, gli uncini o ganci
+// react nelle ultime versioni è passato da componenti con le classi, a componenti funzionali, ovvero componenti che sono delle funzioni, oltre a questo passaggio sono stati introdotti gli HOOKS, gli uncini o ganci
 
 // l'hook useState serve gestisce le variabili, al 90% queste sono tutte gestite dallo useState, che va a sostituire let e var, lo useState ha scope GLOBALE, ed è dedicata solo a react
 
@@ -12,6 +12,7 @@
 
 // tutto quello scritto nella in react è JSX che è un linguaggio specifico di react che è un derivato di javascript
 
+// JSX sta per javascriptXLM e permette di scrivere e aggiungere html tramite react
 
 // interpolazione dei dati significa prendere un dato che è nella classe e stamparlo a video*INTERPOLAZIONE DATI
 

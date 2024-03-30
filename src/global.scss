@@ -1,3 +1,28 @@
 body {
-    font-family: 'Montserrat', sans-serif!important;
+
+  font-family: "Montserrat", sans-serif !important;
 }
+
+.carousel.slide {
+  margin-top: -19px;
+  margin-bottom: 20px;
+}
+
+.carousel-caption {
+  h3 {
+    font-family: "Homemade Apple", cursive;
+    font-size: 40;
+    text-shadow: black 2px 3px 3px;
+  }
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 4rem !important;
+  height: 4rem !important;
+  opacity: 0, 5 !important;
+}
+
+//COMPITO DA SOLI A CASA:
+
+// FARE IN MODO CHE SE SI HA UNA SOLA IMMAGINE NON CI SIA IL CAROUSEL MA SOLO L'IMMAGINE CHE DEVE MANTENERE IL LAYOUT DELLE IMMAGINI CAROUSEL

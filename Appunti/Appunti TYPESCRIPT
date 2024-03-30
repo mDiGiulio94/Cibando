@@ -1,9 +1,0 @@
-// TYPESCRIPT è 
-
-// Per tipizzare una variabile di stato speso non si tipizza perché se la prende da solo tramite ineference, ovvero che quando viene dichiarata si prende il valore preso dalla dichiarazione, a meno che si mette il nome e non ci si mette nulla ad esempio
-
-// const [x, setX] = useState < string > ();
-
-// è molto raro che accada ma se dovesse esercene bisogno questo è il tipo di modalità che si fa, ad esempio
-
-// const [y, setY] = useState < number[] | undefined > ([]);
