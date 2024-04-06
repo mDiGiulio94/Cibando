@@ -14,6 +14,11 @@
 
 // Comando per intallare pacchetti più adatti che può essere usato sempre npm i --legacy--peer-deps
 
+//ESTENSIONE STYLED
+// npm i -D styled-components@5.3.10 @types/styled-components
+
+// Libreria per rendere il router userfriendly (non ufficiale)
+// npm i react-router-dom
 
 //------------------------------------------------------------------------------------------------------------
 
@@ -122,6 +127,15 @@ const nome = () => {
 }
 
 
+------------------------------------------------------------------------------------------------------------------
+
+il secondo hook che c'è in react altro pilastro oltre allo useSTATE() (una variabile di stato con scope globale utilizzabile su qualsiasi punto del componente che si basa su due chiavi una che dichiara e una che setta)
+
+ogni componente, soprattuto i componenti pagina hanno un ciclo di vita, ovvero quando un componente compare su schermo la prima volta, viene "montato a schermo", può essere modificato o distrutto (nel senso che quando si crea una nuova pagina la prima viene "distrutta" e si crea quella nuova, nello scambio succede la stessa cosa)
+
+il secondo hook è quindi lo useEFFECT(), a parte ad essere tra i primi due ad essere usciti, lo useState simboleggia le variabili, mentre useEFFECT() gestisce i cicli di vita del componente (quando vengono distrutti, modificati o ricreati)
+
+l'useEFFECT() ha l'array di dipendenze [], vuoto significa che l'useEFFECT si attiva all'apertura di ogni pagina, mentre se ha elementi dentro vuol dire che si rimanda a qualcos'altro quando una condizione si avvera.
 
 */
 

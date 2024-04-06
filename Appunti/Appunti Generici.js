@@ -40,3 +40,47 @@
 //il bootstraps di react non cerca nel percorso css ma scss
 
 //FRATE RICORDATELO LA LUNGHEZZA DI UNA QUALSIASI COSA TE LA DA NOME.LENGTH NON CE CASCA N'ALTRA VOLTA SALAME
+
+
+// COMANDO PER SCRIVERE STILI SCSS/CSS IN PAGE SU REACT
+//SE SI HA BISOGNO DI UNA VERSIONE SPECIFICA SI METTE LA @ E POI IL NUMERO DELLA VERSIONE
+
+
+//per applicare styled è consigliato creare un tag contenitore qualsiasi contenitore che funge da stile per tutta la pagina
+//ad esempio <Container></Container>
+
+
+//i metodi possono essere richiamati tramite lo scatenarsi di un evento (ad esempio un click o il premeri di un determinato pulsante, una o un certo numero di volte ecc...) ovvero finché non si verifica una condizione, QUANDO SI VUOLE CHE I METODI VENGANO MONTATI ALL'APERTURA DELLA PAGINA INDIPENDENTEMENTE DA QUELLO CHE FA L'UTENTE, si usa lo useEFFECT(), è sempre lo stesso hook ma in base a come lo scrivi gestisce le tre istanze precedenti (cancella modifica e posta)
+
+//useSTATE() va importato all'interno di react, anche useEFFECT, ma può essere inserito con una virgola all'interno dello stasso import
+
+
+//CONVIENE SEMPRE FARE FILE A PARTE A LIVELLO DI PULIZIA E ORDINE
+
+
+//ALLA DOMANDA come è fatta una pagina? si risponde dicendo da IMPORT, FUNZIONE(componente), LOGICA, RETURN(html+jsx), e STILI(opzionali)
+
+//una BUON PRATICA è fare CTRL + P ti aiuta a cercare i file per nome, rendendo più facile la ricerca di file soprattutto quando ci si trova a lavorare con un gran numero di componenti e pagine
+
+
+//href è l'attributo di html molto vecchio in per spostarsi ad un altro percorso, i due problemi che ha sono:
+//1) ricarica la pagina
+//2) nasce per andare da un'altra parte
+
+//siccome si vuole rimanere sempre in index html e non si vuole che si ricarichi la pagina bisogna usare invece il link
+
+
+/*
+
+la pagina misura sempre il 100% di width perciò se c'è il caso di dover suddividerlo il 4 cards si può impostare che la loro grandezza (in percentuale è meglio), gestendo gli spazi, ad esempio dividendo lo spazio di delle card come 20% e settando i margini al 5%, ma questo è applicabile a qualsiasi tipo di larghezza
+
+
+SE SI TROVA IN AMBIENTE TYPESCRIPT bisogna creare un interfaccia identica all'oggetto (tipo quelli in cartella mock), in cui si specificano tutte le chiavi di che tipo sono (number sting boolean)
+
+L'interfaccia va generalmente creata all'interno di una cartella "models" e il file è spesso chiamato x.model.js
+
+l'interfaccia ha solo bisogno di export
+
+
+
+*/
