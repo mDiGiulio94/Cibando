@@ -5,6 +5,7 @@ altro pilastro molto importante di react sono le PROPS
 */
 
 import React from "react";
+import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 
@@ -24,7 +25,9 @@ const RecipeCard = ({ ricette }) => {
             <div className="card-body">
               <h5 className="card-title">{ricetta.title}</h5>
               <p className="card-text">{ricetta.description}</p>
-              <button className="btn btn-primary">Visualizza</button>
+              <Link to={`/dettaglio/${ricetta.title}/${ricetta._id}`} >
+                <button className="btn btn-primary">Visualizza</button>
+              </Link>
             </div>
           </div>
         </div>

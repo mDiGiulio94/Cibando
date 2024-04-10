@@ -23,12 +23,24 @@ console.log(error)
 
 }
 
+//quando si fanno delle chiamate per dei parametri questi si scrivono tra le parentesi tonde
+
+async function getRecipe(id) {
+    try {
+        const response = await RECIPES.find(ricetta => ricetta._id === id)
+        return response
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 //siccome si avranno tante chiamate all'interno di questo file si può alla fine creare un oggetto contenente i vari metodi associando come chiave e valore lo stesso nome della chiamata che vogliamo richiamare, questo perché invece di fare tanti diversi export si usa un unico oggetto che li porta tutti quanti
 const RecipeApi = {
 
-getRecipes: getRecipes
-
+    getRecipes: getRecipes,
+getRecipe: getRecipe
 
 }
 
 export default RecipeApi;
+

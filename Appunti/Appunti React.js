@@ -137,6 +137,13 @@ il secondo hook è quindi lo useEFFECT(), a parte ad essere tra i primi due ad e
 
 l'useEFFECT() ha l'array di dipendenze [], vuoto significa che l'useEFFECT si attiva all'apertura di ogni pagina, mentre se ha elementi dentro vuol dire che si rimanda a qualcos'altro quando una condizione si avvera.
 
+
+-----------------------------------------------------------------------------
+
+-COME SI VERIFICA SE UN PATH FUNZIONA O NO?
+
+Per visualizzare se una ROUTE funziona si può, anche senza aver attivato l'elemento, verificare l'url il percorso della pagina che dobbiamo far vedere
+
 */
 
 
