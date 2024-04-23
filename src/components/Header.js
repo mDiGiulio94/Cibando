@@ -2,6 +2,7 @@ import React from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
+import PersonIcon from "@mui/icons-material/Person";
 import Logo from "../assets/images/icona-cibando.png";
 import {Link} from "react-router-dom";
 
@@ -12,7 +13,7 @@ const Header = () => {
         <nav className="navbar navbar-expand-lg bg-red navbar-dark">
           <div className="container-fluid">
             <Link to="/" className="navbar-brand" alt="cibando">
-              <img src={Logo} className="icona-cibando" />
+              <img src={Logo} className="icona-cibando" alt="logo" />
               Cibando
             </Link>
             <button
@@ -36,6 +37,11 @@ const Header = () => {
                 <li className="nav-item">
                   <Link to="/ricette" className="nav-link">
                     <MenuBookIcon>Filled</MenuBookIcon> Ricette
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/registrazione" className="nav-link">
+                    <PersonIcon>Filled</PersonIcon> Registrazione
                   </Link>
                 </li>
                 <li className="nav-item">

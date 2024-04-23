@@ -4,12 +4,36 @@ import styled from "styled-components";
 //Elementi bootstrap
 import Card from "react-bootstrap/Card";
 
-const Dettaglio = ({ ricetta }) => {
-  return (
-      <Contenitore>
 
-      <div
-        style={{ backgroundImage: `url(${ricetta?.image})`  }}
+const Dettaglio = ({ ricetta }) => {
+
+  function Livello() {
+
+    let string
+    if (ricetta?.difficulty <= 2) {
+
+      string = "facile"
+
+    } else if (ricetta?.difficulty === 3) {
+
+      string = "medio"
+
+    } else {
+
+      string = "difficile"
+
+    }
+    return (string)
+  }
+
+  const percorsoDifficolta = "/assets/images/difficolta-"
+
+
+
+  return (
+    <Contenitore>
+<div
+        style={{ backgroundImage: `url(${ricetta?.image})` }}
         className="img"
       ></div>
       <Card>
@@ -18,17 +42,27 @@ const Dettaglio = ({ ricetta }) => {
           <Card.Text>{ricetta?.description}</Card.Text>
         </Card.Body>
         <Card.Footer>
-          <p>Difficoltà: {ricetta?.difficulty}</p>
-          <p>09/04/2024</p>
+          <div className="row">
+            <p>Difficoltà: {Livello(ricetta?.difficulty)} </p>
+            <img
+              src={percorsoDifficolta + ricetta?.difficulty + ".png"}
+              alt={ricetta?.title}
+              className="difficolta"
+            />
+          </div>
+
+          <p>{ricetta?.date}</p>
         </Card.Footer>
       </Card>
     </Contenitore>
   );
 };
 
-const Contenitore = styled.div`
-  .card {
 
+
+const Contenitore = styled.div`
+
+  .card {
     border: none;
   }
 
@@ -53,6 +87,11 @@ const Contenitore = styled.div`
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+  }
+
+
+  .difficolta{
+    width: 150px;
   }
 `;
 

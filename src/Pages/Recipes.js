@@ -7,13 +7,24 @@ import RecipeCard from "../components/RecipeCard";
 
 const Recipes = () => {
   const [ricette, setRicette] = useState([]);
+  const [titolo, setTitolo] = useState("");
 
   async function prendiRicette() {
     try {
       const response = await RecipeApi.getRecipes();
-      setRicette(response);
+      if (response) {
+        setRicette(response.sort((a, b) => b._id - a._id));
+      }
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  function titoloDalFiglio(data) {
+    if (data !== titolo) {
+      return setTitolo(data);
+    } else {
+      setTitolo("");
     }
   }
 
@@ -48,9 +59,16 @@ const Recipes = () => {
 
   return (
     <>
-      <Contenitore>
-        <h2>Le nostre Ricette</h2>
-        <RecipeCard ricette={ricette} />
+      <Contenitore className="test">
+        <h2>Le nostre Ricette:</h2>
+
+        <div className="visualizza">{titolo && <h3>{titolo}</h3>}</div>
+
+        <RecipeCard
+          ricette={ricette}
+          onTitoloRicevuto={titoloDalFiglio}
+          pag="ricette"
+        />
       </Contenitore>
     </>
   );
@@ -61,6 +79,13 @@ const Contenitore = styled.div`
   h2 {
     margin-left: 1.7%;
     margin-top: 10px;
+  }
+
+  .visualizza {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 40px;
+    height: 20px;
   }
 `;
 

@@ -92,4 +92,43 @@ GLI HOOK ERANO ESCLUSIVA DI REACT SOLO DOPO SONO STATI AGGIUNTI DA ALTRI FORNITO
 
 con le {} in un import SIGNIFICA CHE SI STA PRENDENDO QUELL'ELEMENTO SPECIFICO INVECE CHE OGNI ELEMENTO
 
+
+onClick={inviaTitolo} in questo modo si richiama una funzione SENZA PASSARE PARAMETRI
+
+onClick={() => inviaTitolo(ricetta.titolo)} richiamo funzione su un EVENTO dove invece SI POSSONO PASSARE I PARAMETRI tramite una funzione anonima e un arrow function dove poi vanno inseriti i parametri
+
+
+--------------------------------------------------------------------------
+
+Esempio gestione evento generico
+
+/*
+
+     const [evidenziazione, setEvidenziazione] = useState(false);
+
+     // in questo oggetto ci saranno coppie di css, ma non stando in css, bisogna scrivere in JSX ovvero senza inserire trattino, tutto attaccato e con camelcase, anche se la zona in cui viene scritto è javascript
+     const bgDinamico = {
+       backgroundColor: evidenziazione ? "yellow" : "white",
+       fontSize: "50px",
+       cursor: "pointer",
+       textAlign: "left",
+     };
+
+     // evento al click come crearlo in react:
+
+     const onEvidenziazione = () => {
+       setEvidenziazione(!evidenziazione);
+     };
+
+
+     ----- Passaggio parametri
+       <h2 style={bgDinamico} onClick={onEvidenziazione}>
+              Benvenuti in Cibando
+            </h2>
 */
+
+
+
+
+
+

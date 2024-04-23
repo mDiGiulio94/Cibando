@@ -20,6 +20,11 @@
 // Libreria per rendere il router userfriendly (non ufficiale)
 // npm i react-router-dom
 
+//Libreria grafica (tipo matiria)
+//npm i antd e
+// per l'installazione delle icone
+// npm  i @ant-design/icons
+
 //------------------------------------------------------------------------------------------------------------
 
 // è raro usare let in react perché lo stesso predilige l'immutabilià di stato delle variabili
@@ -143,6 +148,12 @@ l'useEFFECT() ha l'array di dipendenze [], vuoto significa che l'useEFFECT si at
 -COME SI VERIFICA SE UN PATH FUNZIONA O NO?
 
 Per visualizzare se una ROUTE funziona si può, anche senza aver attivato l'elemento, verificare l'url il percorso della pagina che dobbiamo far vedere
+
+
+-----------------------------------------------------------------------------------------------
+
+Per passare dei parametri da figlio a padre il metodo da seguire 
+
 
 */
 

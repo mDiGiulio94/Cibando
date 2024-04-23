@@ -10,18 +10,42 @@ import Dettaglio from "../components/Dettaglio";
 
 const DetailRecipe = () => {
 
-     const { id } = useParams();
+    const { id } = useParams();
     const [ricetta, setRicetta] = useState();
-
+    const [loading, setLoading] = useState(false)
 
     async function onGetRecipe() {
         try {
-            const idNumber = Number(id)
-            const ricetta = await RecipeApi.getRecipe(idNumber)
-        setRicetta(ricetta)} catch (error) { console.log(error) }
-    }
+            setLoading(true);
+            const idNumber = Number(id);
+            const ricetta = await RecipeApi.getRecipe(idNumber);
+            // siccome il set deve essere fatto quando c'è la certezza che trova la ricetta si aggiunge un if
+            // con questo if si dice che se il parametro ricetta è trovato allora lo spinner non si vede, altrimenti se non la trova fa vedere lo spinner
+            if (ricetta) {
+              /*
 
-//useEffect regolare che si usa al mount, una volta sola al montaggio del componente, senza array di dipendenze l'istruzione dice che lo use effect deve essere ripetito ogni volt che una variabile di stato cambia valore
+                  Esempio di Timeout:
+
+              setTimeout(() => {
+                setRicetta(ricetta);
+
+                setLoading(false);
+              }, 3000);  */
+              // Commentare queste due voci per attivare il timer
+              setRicetta(ricetta);
+              setLoading(false);
+            } else {
+                setLoading(false)
+            }
+
+        } catch (error) {
+            console.log(error);
+            setLoading(false)
+        }
+    }
+    //per simulare una risposta lenta da server si usa un timer con un timeout
+
+    //useEffect regolare che si usa al mount, una volta sola al montaggio del componente, senza array di dipendenze l'istruzione dice che lo use effect deve essere ripetito ogni volt che una variabile di stato cambia valore
     useEffect(() => {
         onGetRecipe();
 
@@ -29,14 +53,40 @@ const DetailRecipe = () => {
     }, []);
 
 
+    return (
+      <Contenitore>
+        {ricetta && <Dettaglio ricetta={ricetta} />}
 
-    return (<Contenitore>
+        {!ricetta && !loading && (
+          <div className="mancante"> Spiacente la pagina non è disponibile</div>
+        )}
 
-        <Dettaglio ricetta={ricetta} />
-    </Contenitore>)
+        {loading && (
+          <div className="container-spinner">
+            <div className="spinner-border text-danger" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        )}
+      </Contenitore>
+    );
 }
 
-const Contenitore = styled.div``;
+const Contenitore = styled.div`
+  .mancante {
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container-spinner {
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+`;
 
 export default DetailRecipe
 
@@ -49,12 +99,27 @@ const pippo = useParams().id;
 
 è lo stesso scritto nel path in app.js solo che si una un . invece che i :
 
-----------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 
 il secondo modo è:
 
 const { id } = useParams();
 
 in questa scrittura si possono passare più parametri aggiungendo semplicemente una virgola
+
+---------------------------------------------------------------------------------------
+
+ questo è il caso in cui far apparire lo spinner in questo modo si possono inserire condizioni
+      {/* { loading && (
+        <div className="container fluid">
+          <div className="spinner-border text-danger" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      )}
+
+
+
+
 
 */

@@ -7,6 +7,8 @@ import Home from "./Pages/home";
 import Recipes from "./Pages/Recipes";
 import Header from "./components/Header";
 import DetailRecipe from "./Pages/detailRecipe";
+import RegistrationUser from "./Pages/RegistrationUser";
+import Footer from "./components/Footer";
 
 
 
@@ -19,15 +21,19 @@ function App() {
 
 
   return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/ricette" element={<Recipes />} />
-        <Route path="/dettaglio/:title/:id" element={<DetailRecipe />} />
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/ricette" element={<Recipes />} />
+          <Route path="/dettaglio/:title/:id" element={<DetailRecipe />} />
+          <Route path="/registrazione" element={<RegistrationUser />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </>
   );
 }
 
