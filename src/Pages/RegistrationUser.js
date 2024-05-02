@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from "react";
+
+//import del provider
+import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../Context/userContext";
+
 import styled from "styled-components";
 import { Input } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-
-
+import Termini from "../components/Accordion";
 
 //SE IL PULSANTE NON SI ATTIVA RICORDATI CHE LA PASSWORD DEVE RISPETTARE I PARAMETRI DELLA REGEX
 
 const RegistrationUser = () => {
+  //destrutturazione di un oggetto per prendere la chiave register
+  const { registerUser } = useUserContext();
+
+  //uso del NAVIGATE
+  const navigate = useNavigate();
+
   //viene subito impostata una variabile di stato con dentro un oggetto, con dei valori definiti
   const [formValues, setFormValues] = useState({
     name: "",
@@ -23,6 +33,17 @@ const RegistrationUser = () => {
   //variabile di stato per la validazione del form
 
   const [formValido, setFormValido] = useState(false);
+
+  //varibile di stato apertura accordion
+  const [visualizza, setVisualizza] = useState(false);
+
+  //funzione per l'apertura e la chiusura dell'accordion al premere della checkbox
+  const apri = () => {
+    if (visualizza === false) {
+  setVisualizza(true)
+}else {setVisualizza(false)}
+  }
+
 
   //GESTIONE FORM
   /*i form in react vengono gestiti in DIVERSI modi, dato che non c'è modo "ufficiale" da seguire, quello
@@ -43,10 +64,19 @@ const RegistrationUser = () => {
       [evento.target.name]:
         evento.target.type !== "checkbox"
           ? evento.target.value.trim()
-          : evento.target.checked
-    })
-      if (evento.target.name === 'ripetiPassword' || evento.target.name === 'password') { convalidaPassword(); }
-  };
+          : evento.target.checked,
+    });
+    if (
+      evento.target.name === "ripetiPassword" ||
+      evento.target.name === "password"
+    ) {
+      convalidaPassword();
+    }
+    //modifica dell'handle onChange per inserire il target sulla checkbox
+    if (evento.target.name === "accetto") {
+  apri()
+}
+ };
 
   /* questo metodo compie la destrutturatizzaizione di un oggetto, dicendo letteralmente
       che si creano due costanti name e value e prendo il nome e il valore che passa l'evento target*/
@@ -129,6 +159,13 @@ const RegistrationUser = () => {
   function onSubmitForm(event) {
     event.preventDefault();
     console.log("campi del form ", formValues);
+    const utente = {
+      name: formValues.name,
+      email: formValues.email,
+    };
+    //passare al metodo tutti i valori del form
+    registerUser(utente);
+    navigate("/");
   }
 
   useEffect(
@@ -153,6 +190,7 @@ const RegistrationUser = () => {
 
           */
       setFormValido(isFormValid && campiCompilati);
+
     },
     //controlla il cambiamento all'aggiornarsi del form
     [formValues, formErrors]
@@ -188,7 +226,7 @@ const RegistrationUser = () => {
                                 type="text"
                                 id="name"
                                 className={`form-control ${
-                                  formErrors.name ? "is-valid" : ""
+                                  formErrors.name ? "is-invalid" : ""
                                 }`}
                                 name="name"
                                 value={formValues.name}
@@ -219,7 +257,7 @@ const RegistrationUser = () => {
                                 type="email"
                                 id="email"
                                 className={`form-control ${
-                                  formErrors.email ? "is-valid" : ""
+                                  formErrors.email ? "is-invalid" : ""
                                 }`}
                                 name="email"
                                 value={formValues.email}
@@ -262,7 +300,7 @@ const RegistrationUser = () => {
                                 <p className="help is-danger">
                                   <ul>
                                     <li>
-                                      Il campo password deve contenere un{" "}
+                                      Il campo password deve contenere un
                                       <strong>numero</strong>
                                     </li>
                                     <li>una maiuscola</li>
@@ -291,7 +329,6 @@ const RegistrationUser = () => {
                                 name="ripetiPassword"
                                 value={formValues.ripetiPassword}
                                 onChange={handleOnChange}
-
                               />
                               <label
                                 className="form-label"
@@ -310,27 +347,25 @@ const RegistrationUser = () => {
                           <div className="form-check d-flex justify-content-center mb-5">
                             <input
                               className={`form-check-input me-2  ${
-                                formErrors.accetto ? "is-valid" : ""
+                                formErrors.accetto ? "is-invaild" : ""
                               }`}
                               type="checkbox"
                               name="accetto"
                               value={formValues.accetto}
                               id="accetto"
                               onChange={handleOnChange}
+
                             />
                             <label
+
                               className="form-check-label"
                               htmlFor="accetto"
                             >
-                              Accetto i termini del contratto
+                              Mostra e accetta i termini del contratto
                             </label>
-                            {formErrors.accetto && (
-                              <p className="help is-danger">
-                                {formErrors.accetto}
-                              </p>
-                            )}
                           </div>
-
+                          {/* accordion con prop visualizza */}
+                  <Termini visualizza={visualizza}/>
                           <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                             <button
                               type="submit"
@@ -360,7 +395,7 @@ const RegistrationUser = () => {
       </Contenitore>
     </>
   );
-}
+};
 
 const Contenitore = styled.div`
   form {
@@ -380,5 +415,7 @@ const Contenitore = styled.div`
   section {
     margin-top: -15px;
   }
+
+  
 `;
 export default RegistrationUser;

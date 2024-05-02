@@ -5,6 +5,8 @@ import styled from "styled-components";
 import RecipeApi from "../API/recipeAPI";
 import RecipeCard from "../components/RecipeCard";
 
+import Modale from "../components/Modale";
+
 const Recipes = () => {
   const [ricette, setRicette] = useState([]);
   const [titolo, setTitolo] = useState("");
@@ -27,6 +29,7 @@ const Recipes = () => {
       setTitolo("");
     }
   }
+
 
   //solitamente lo useEFFECT() si scrive appena prima del return
   //la sintassi è uguale a quella dei metodi di js (vedi i metodi sugli array)
@@ -69,6 +72,7 @@ const Recipes = () => {
           onTitoloRicevuto={titoloDalFiglio}
           pag="ricette"
         />
+        <Modale pag ="ricette"/>
       </Contenitore>
     </>
   );

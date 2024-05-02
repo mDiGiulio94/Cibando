@@ -29,6 +29,19 @@ body {
 
 }
 
-//COMPITO DA SOLI A CASA:
+//quando si modificano dei componenti di librerie grafiche è conviene farle nel global css
 
-// FARE IN MODO CHE SE SI HA UNA SOLA IMMAGINE NON CI SIA IL CAROUSEL MA SOLO L'IMMAGINE CHE DEVE MANTENERE IL LAYOUT DELLE IMMAGINI CAROUSEL
+.paginatore{
+  clear: both;
+  display: flex;
+  justify-content: center!important;
+}
+
+//In html esisto molti tipi di tag, e il 70% di questi come div, p, gli h, sono di tipo block BLOCK; (span è di tipo INLINE), block significa che occupano tutto lo spazio disponibile(ad esempio due p, anche composti da 1 sola parola l'uno, prendono tutto il blocco su dove si trovano e si troveranno quindi uno sotto l'altro);
+
+//per mettere due block uno di fianco all'altro o si mette l'INLINE-BLOCK
+
+//o il FLOAT in modo che non prendono più il 100% dello spazio, ma solo lo "spazio" che effettivamente occupano
+
+//se si vuole che un elemento block preso nel float sia fuori da questo processo si usa il CLEAR
+

@@ -125,6 +125,12 @@ Esempio gestione evento generico
        <h2 style={bgDinamico} onClick={onEvidenziazione}>
               Benvenuti in Cibando
             </h2>
+
+-----------------------------------------------
+
+MODALI = finestre in sovrimpressione, la differenza da una pop-up di solito sono pagine html esterne che vengono caricate, mentre invece fa apparire un componente in rilievo, e servono per usi concreti
+
+
 */
 
 
