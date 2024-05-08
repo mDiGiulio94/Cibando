@@ -1,0 +1,47 @@
+body {
+  font-family: "Montserrat", sans-serif !important;
+}
+
+.carousel.slide {
+  margin-top: -19px;
+  margin-bottom: 20px;
+}
+
+.carousel-caption {
+  h3 {
+    font-family: "Homemade Apple", cursive;
+    font-size: 40;
+    text-shadow: black 2px 3px 3px;
+  }
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 4rem !important;
+  height: 4rem !important;
+  opacity: 0, 5 !important;
+}
+
+.test {
+  display: block;
+  float: left;
+  width: 100%;
+
+}
+
+//quando si modificano dei componenti di librerie grafiche è conviene farle nel global css
+
+.paginatore{
+  clear: both;
+  display: flex;
+  justify-content: center!important;
+}
+
+//In html esisto molti tipi di tag, e il 70% di questi come div, p, gli h, sono di tipo block BLOCK; (span è di tipo INLINE), block significa che occupano tutto lo spazio disponibile(ad esempio due p, anche composti da 1 sola parola l'uno, prendono tutto il blocco su dove si trovano e si troveranno quindi uno sotto l'altro);
+
+//per mettere due block uno di fianco all'altro o si mette l'INLINE-BLOCK
+
+//o il FLOAT in modo che non prendono più il 100% dello spazio, ma solo lo "spazio" che effettivamente occupano
+
+//se si vuole che un elemento block preso nel float sia fuori da questo processo si usa il CLEAR
+
