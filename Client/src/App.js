@@ -1,6 +1,9 @@
 import "./App.scss";
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import { UserProvider } from "./Context/userContext";
+import { AuthProvider } from "./auth/AuthContext";
+import { ProtectedRoutes } from "./auth/ProtectedRoute";
+import React from "react";
 
 // Pagine
 import Home from "./Pages/home";
@@ -11,6 +14,7 @@ import RegistrationUser from "./Pages/RegistrationUser";
 import Footer from "./components/Footer";
 import Contatti from "./Pages/Contatti";
 import AggiunngiRicetta from "./Pages/AggiungiRicetta";
+import Login from "./Pages/Login";
 
 
 
@@ -27,17 +31,28 @@ function App() {
     <>
       <UserProvider>
         <Router>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/ricette" element={<Recipes />} />
-            <Route path="/aggiungi" element={<AggiunngiRicetta /> } />
-            <Route path="/dettaglio/:title/:id" element={<DetailRecipe />} />
-            <Route path="/registrazione" element={<RegistrationUser />} />
-            <Route path="/contatti" element={<Contatti /> } />
-          </Routes>
-          <Footer />
+          <AuthProvider>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/ricette" element={<Recipes />} />
+              <Route path="/dettaglio/:title/:id" element={<DetailRecipe />} />
+              <Route path="/registrazione" element={<RegistrationUser />} />
+              <Route path="/contatti" element={<Contatti />} />
+              <Route path="/login" element={<Login />} />
+              {/* route protetta */}
+              <Route
+                path="/aggiungi"
+                element={
+                  <ProtectedRoutes>
+                    <AggiunngiRicetta />
+                  </ProtectedRoutes>
+                }
+              />
+            </Routes>
+            <Footer />
+          </AuthProvider>
         </Router>
       </UserProvider>
     </>

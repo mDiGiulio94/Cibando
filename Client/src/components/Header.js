@@ -55,6 +55,11 @@ const Header = () => {
                     <MarkAsUnreadIcon>Filled</MarkAsUnreadIcon> Contatti
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link to="/login" className="nav-link">
+                    <MarkAsUnreadIcon>Filled</MarkAsUnreadIcon> Accedi
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
