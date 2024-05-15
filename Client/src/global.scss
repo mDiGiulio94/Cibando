@@ -37,6 +37,15 @@ body {
   justify-content: center!important;
 }
 
+
+.descrizione .ck-editor__editable {
+
+min-height: 200px !important;
+max-height: 200px !important;
+
+
+}
+
 //In html esisto molti tipi di tag, e il 70% di questi come div, p, gli h, sono di tipo block BLOCK; (span è di tipo INLINE), block significa che occupano tutto lo spazio disponibile(ad esempio due p, anche composti da 1 sola parola l'uno, prendono tutto il blocco su dove si trovano e si troveranno quindi uno sotto l'altro);
 
 //per mettere due block uno di fianco all'altro o si mette l'INLINE-BLOCK

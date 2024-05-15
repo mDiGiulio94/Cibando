@@ -2,13 +2,22 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Select, Input } from "antd";
 import { Snackbar, Alert } from "@mui/material";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import Modale from "../components/Modale";
 
 import RecipeApi from "../API/recipeAPI";
 
 const AggiunngiRicetta = () => {
-    const [open, setOpen] = useState(false);
+  const [description, setDescription] = useState();
+
+  const handleEditorChange = (event, value) => {
+    const data = value.getData();
+    setDescription(data);
+  };
+
+  const [open, setOpen] = useState(false);
 
   const [openSnack, setOpenSnack] = useState(false);
 
@@ -44,9 +53,8 @@ const AggiunngiRicetta = () => {
   };
 
   const chiudiModale = () => {
-      setOpen(false)
+    setOpen(false);
   };
-
 
   //variabile di stato per la gestione degli errori
 
@@ -82,41 +90,39 @@ const AggiunngiRicetta = () => {
         ...prevError,
         [name]: "Perfavore, completa il campo",
       }));
-    }  else {
-        setError((prevError) => ({
-          ...prevError,
-          [name]: undefined,
-        }));
+    } else {
+      setError((prevError) => ({
+        ...prevError,
+        [name]: undefined,
+      }));
     }
   };
 
   //onSubmit per prevenire il defeult del form all'invio del form
- async function onSubmitF(evento) {
-      evento.preventDefault();
-      chiudiModale()
-      console.log("campi del form ", formValues);
+  async function onSubmitF(evento) {
+    evento.preventDefault();
+    chiudiModale();
+    console.log("campi del form ", formValues);
 
-      try {
-     const dati = {
-       title: formValues.nome,
-       difficulty: formValues.difficolta,
-       image: formValues.immagine,
-       description: formValues.descrizione,
-     };
-     const response = await RecipeApi.postRecipe(dati);
-     if (response && response.status === 200) {
-       setSeverity("success");
-       setMessage("ricetta registrata con successo!");
-       setOpenSnack(true);
-     } else {
-       setSeverity("error");
-       setMessage("Errore registrazione ricetta");
-       setOpenSnack(true);
-     }
-   } catch (error) {
-
-   }
-    }
+    try {
+      const dati = {
+        title: formValues.nome,
+        difficulty: formValues.difficolta,
+        image: formValues.immagine,
+        description: formValues.descrizione,
+      };
+      const response = await RecipeApi.postRecipe(dati);
+      if (response && response.status === 200) {
+        setSeverity("success");
+        setMessage("ricetta registrata con successo!");
+        setOpenSnack(true);
+      } else {
+        setSeverity("error");
+        setMessage("Errore registrazione ricetta");
+        setOpenSnack(true);
+      }
+    } catch (error) {}
+  }
 
   useEffect(() => {
     //se in un valore dell'oggetto è presente un errore, questa è valorizzata e quindi lancia l'errore, altrimenti non ci sono errori
@@ -133,7 +139,6 @@ const AggiunngiRicetta = () => {
     setValido(isValid && condizioni);
     //all'aggiornamento controlla questi campi
   }, [formValues, error]);
-
 
   return (
     <>
@@ -233,16 +238,13 @@ const AggiunngiRicetta = () => {
               <label className="label" htmlFor="descrizione1">
                 Descrizione Ricetta:
               </label>
-
-              <Input.TextArea
-                rows={4}
-                onBlur={validazioneCampi}
-                onChange={handleOnChange}
-                name="descrizione"
-                id="descrizione"
-                value={formValues.descrizione}
-                className={`control ${error.descrizione ? "errore" : ""}`}
-              />
+              <div className="descrizione">
+                <CKEditor
+                  editor={ClassicEditor}
+                  data={description}
+                  onChange={handleEditorChange}
+                />
+              </div>
               <div className="prova">
                 {error.descrizione && (
                   <p className="help ">{error.descrizione}</p>
@@ -264,7 +266,7 @@ const AggiunngiRicetta = () => {
         <Modale page="nuovaRicetta" info={info} open={open} invia={onSubmitF} />
         <Snackbar
           open={openSnack}
-         autoHideDuration={4000}
+          autoHideDuration={4000}
           onClose={closeToast}
           anchorOrigin={{ vertical, horizontal }}
         >
@@ -344,8 +346,6 @@ const Contenitore = styled.div`
   textarea {
     resize: none;
   }
-
-
 `;
 
 export default AggiunngiRicetta;

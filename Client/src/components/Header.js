@@ -1,15 +1,39 @@
-import React from "react";
+import React, { useContext } from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
 import PersonIcon from "@mui/icons-material/Person";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Logo from "../assets/images/icona-cibando.png";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+
+import { AuthContext } from "../auth/AuthContext";
+import { useNavigate } from "react-router-dom";
+import LoginIcon from '@mui/icons-material/Login'
+import LogoutIcon from "@mui/icons-material/Logout";
 
 
 const Header = () => {
-    return (
+
+  const { isAuth, logout, name } = useContext(AuthContext)
+
+  const navigate = useNavigate();
+
+  const esci = () => {
+    try {
+      const response = logout()
+      if (response.success === true) {
+        navigate('/')
+        
+      } else {console.log('errore nel logout')}
+
+    } catch (error) {
+
+    }
+  }
+
+  return (
+    <>
       <header>
         <nav className="navbar navbar-expand-lg bg-red navbar-dark">
           <div className="container-fluid">
@@ -41,14 +65,18 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/aggiungi" className="nav-link">
-                    <AddCircleIcon>Filled</AddCircleIcon> Aggiungi Ricetta
-                  </Link>
+                  {isAuth && (
+                    <Link to="/aggiungi" className="nav-link">
+                      <AddCircleIcon>Filled</AddCircleIcon> Aggiungi Ricetta
+                    </Link>
+                  )}
                 </li>
                 <li className="nav-item">
-                  <Link to="/registrazione" className="nav-link">
-                    <PersonIcon>Filled</PersonIcon> Registrazione
-                  </Link>
+                  {!isAuth && (
+                    <Link to="/registrazione" className="nav-link">
+                      <PersonIcon>Filled</PersonIcon> Registrazione
+                    </Link>
+                  )}
                 </li>
                 <li className="nav-item">
                   <Link to="/contatti" className="nav-link">
@@ -56,16 +84,34 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/login" className="nav-link">
-                    <MarkAsUnreadIcon>Filled</MarkAsUnreadIcon> Accedi
-                  </Link>
+                  {!isAuth && (
+                    <Link to="/login" className="nav-link">
+                      <LoginIcon>Filled</LoginIcon> Accedi
+                    </Link>
+                  )}
                 </li>
+                {isAuth && (
+                  <>
+                    <li className="nav-item">
+
+                      <Link to="/profilo" className="nav-link">
+                        Ciao <strong>{name}</strong> ecco il tuo Profilo
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link onClick={esci} className="nav-link">
+                        <LogoutIcon>Filled</LogoutIcon> Esci
+                      </Link>
+                    </li>
+                  </>
+                )}
               </ul>
             </div>
           </div>
         </nav>
       </header>
-    );
+    </>
+  );
 }
 
 export default Header

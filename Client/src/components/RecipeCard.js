@@ -6,63 +6,55 @@ servono a passare informazioni da padre a figlio
 
 */
 
-import React,{useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Pagination } from "@mui/material";
 import AppContext from "antd/es/app/context";
 import Modale from "./Modale";
-
-
-
+import DOMPurify from "dompurify";
 
 const RecipeCard = (props) => {
-
   //costante con pagina iniziale
-const [paginaCorrente, setPaginaCorrente] = useState(1)
+  const [paginaCorrente, setPaginaCorrente] = useState(1);
 
   //costante delle ricette per pagina(con costante perché la si vuole fissa in questo caso, ma possono variare con variabile di stato "esercizio da provare")
-  const [ricettePerPagina, setRicettePerPagina] = useState(4)
+  const [ricettePerPagina, setRicettePerPagina] = useState(4);
 
   const [open, setOpen] = useState(false);
-  const [titolo, setTitolo] = useState('')
-  const ricette = props.ricette
+  const [titolo, setTitolo] = useState("");
+  const ricette = props.ricette;
 
   //costente ultima ricetta
-const indiceUltimaRicetta = Math.min(
-  paginaCorrente * ricettePerPagina,
-  ricette.length
-);
+  const indiceUltimaRicetta = Math.min(
+    paginaCorrente * ricettePerPagina,
+    ricette.length
+  );
 
   //costante prima ricetta
   const indicePrimaRicetta = indiceUltimaRicetta - ricettePerPagina;
 
   //ricette attualmente viste
-  const ricetteCorrenti = ricette.slice(indicePrimaRicetta, indiceUltimaRicetta);
+  const ricetteCorrenti = ricette.slice(
+    indicePrimaRicetta,
+    indiceUltimaRicetta
+  );
 
   //costante numero pagine
   const numeroPagine = Math.ceil(ricette.length / ricettePerPagina);
-
-
-
 
   //gestione cambio pagina
   //i parametri sono evento e valore (event e value)
   const cambioPagina = (evento, valore) => {
     //metodo che riceve due parametri (passati dal paginatore)
-setPaginaCorrente(valore)
-
-  }
+    setPaginaCorrente(valore);
+  };
 
   //variabile per cambiare il numero delle ricette visualizzate per pagina
   //altera il numero di ricette tra 4-6-8
   const cambioNumero = (event) => {
-setRicettePerPagina(event.target.value)
-}
-
-
-
-
+    setRicettePerPagina(event.target.value);
+  };
 
   // const ricette = props.ricette
   const accorciaDescrizione = (descrizione) => {
@@ -70,40 +62,34 @@ setRicettePerPagina(event.target.value)
     if (descrizione.length <= lunghezzaMassima) {
       return lunghezzaMassima;
     } else {
-      const posizioneUltimoSpazio = descrizione.indexOf(
-        " ",
-        lunghezzaMassima
-      );
+      const posizioneUltimoSpazio = descrizione.indexOf(" ", lunghezzaMassima);
 
       return posizioneUltimoSpazio;
     }
   };
 
-
-
-function inviaTitolo(titolo) {
+  function inviaTitolo(titolo) {
     if (props.pag === "ricette") {
       props.onTitoloRicevuto(titolo); //richiamando la funzione di callback nel componente padre
+    }
+    setTitolo(titolo);
+    apriModale();
   }
-  setTitolo(titolo)
-  apriModale();
 
-  }
-
-    const apriModale = () => {
-      setOpen(true);
-    };
-
-    const chiudiModale = () => {
-      setOpen(false);
+  const apriModale = () => {
+    setOpen(true);
   };
 
+  const chiudiModale = () => {
+    setOpen(false);
+  };
 
   return (
     <Contenitore>
       {props.pag === "ricette" && (
         <div>
-          Ricette visualizzate {indicePrimaRicetta + 1} a {indiceUltimaRicetta} su un totale di {ricette.length} ricette
+          Ricette visualizzate {indicePrimaRicetta + 1} a {indiceUltimaRicetta}{" "}
+          su un totale di {ricette.length} ricette
         </div>
       )}
       {ricetteCorrenti.map((ricetta, index) => (
@@ -121,11 +107,23 @@ function inviaTitolo(titolo) {
             <div className="card-body">
               <h5 className="card-title">{ricetta.title}</h5>
               <p className="card-text">
-                {ricetta.description.slice(
-                  " ",
-                  accorciaDescrizione(ricetta.description)
-                )}
-                ...
+                {/* si chiama dangerously perché si da la possibilità di scrivere codice html che venga inniettato all'interno del proprio codice, è pericoloso perché si rende vulnerabili ad attacchi hacker, perciò si dovrebbe "SANIFICARE" tutto l'html tramide DOM SANITAIZER tramite un'altra libreria 
+
+             comando installazione:
+
+             npm i dompurify
+
+             */}
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(
+                      ricetta.description.slice(
+                        0,
+                        accorciaDescrizione(ricetta.description)
+                      ) + " ..."
+                    ),
+                  }}
+                />
               </p>
               <Link to={`/dettaglio/${ricetta.title}/${ricetta._id}`}>
                 <button className="btn btn-primary">Visualizza</button>
@@ -202,7 +200,6 @@ const Contenitore = styled.div`
     margin-top: 5px;
     font-weight: 600;
     padding: 3%;
-
   }
 
   .container-card {
@@ -234,8 +231,6 @@ const Contenitore = styled.div`
       }
     }
   }
-
-
 `;
 
 export default RecipeCard;
@@ -255,7 +250,6 @@ className="btn btn-primary">
 
 
 */
-
 
 /*
 1) implementare numero elementi dinamico tramite la select

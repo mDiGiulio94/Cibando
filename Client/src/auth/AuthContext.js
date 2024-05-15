@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
 
   //metodo di logout
 
-  const logOut = () => {
+  const logout = () => {
     setIsAuth(false);
     setUserRole(null);
 
@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }) => {
   //return per passare tutte le funzioni del scritte come props
   return (
     <AuthContext.Provider
-      value={{ isAuth, userRole, name, email, login, logOut }}
+      value={{ isAuth, userRole, name, email, login, logout }}
     >
       {children}
     </AuthContext.Provider>

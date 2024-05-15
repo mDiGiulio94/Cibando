@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import { UserProvider } from "./Context/userContext";
 import { AuthProvider } from "./auth/AuthContext";
 import { ProtectedRoutes } from "./auth/ProtectedRoute";
+import { ProtectedRoutesUser } from "./auth/ProtectedRouteUser";
 import React from "react";
 
 // Pagine
@@ -15,6 +16,7 @@ import Footer from "./components/Footer";
 import Contatti from "./Pages/Contatti";
 import AggiunngiRicetta from "./Pages/AggiungiRicetta";
 import Login from "./Pages/Login";
+import Profile from "./Pages/Profile";
 
 
 
@@ -50,6 +52,9 @@ function App() {
                   </ProtectedRoutes>
                 }
               />
+              <Route path="/profilo" element ={
+                <ProtectedRoutesUser><Profile /></ProtectedRoutesUser>
+            } />
             </Routes>
             <Footer />
           </AuthProvider>
