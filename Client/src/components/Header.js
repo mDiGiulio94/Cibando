@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
@@ -12,25 +12,32 @@ import { useNavigate } from "react-router-dom";
 import LoginIcon from '@mui/icons-material/Login'
 import LogoutIcon from "@mui/icons-material/Logout";
 
+import Modale from "./Modale";
+
 
 const Header = () => {
+  const { isAuth, logout, name } = useContext(AuthContext);
 
-  const { isAuth, logout, name } = useContext(AuthContext)
+  const [open, setOpen] = useState(false);
+
+  //chiudi modale
+  const chiudiModale = () => {
+    setOpen(false);
+  };
 
   const navigate = useNavigate();
 
   const esci = () => {
     try {
-      const response = logout()
+      const response = logout();
       if (response.success === true) {
-        navigate('/')
-        
-      } else {console.log('errore nel logout')}
-
-    } catch (error) {
-
-    }
-  }
+        setOpen(true)
+         navigate("/");
+      } else {
+        console.log("errore nel logout");
+      }
+    } catch (error) {}
+  };
 
   return (
     <>
@@ -93,7 +100,6 @@ const Header = () => {
                 {isAuth && (
                   <>
                     <li className="nav-item">
-
                       <Link to="/profilo" className="nav-link">
                         Ciao <strong>{name}</strong> ecco il tuo Profilo
                       </Link>
@@ -106,6 +112,7 @@ const Header = () => {
                   </>
                 )}
               </ul>
+              <Modale page="logout" open={open} chiudiModale={chiudiModale}></Modale>
             </div>
           </div>
         </nav>

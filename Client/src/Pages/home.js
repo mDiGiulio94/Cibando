@@ -96,6 +96,7 @@ const Home = () => {
       <div>{user ? <p> Bentornato, {user.name}!</p> : <p>Benvenuto</p>}</div>
 
       <Modale page="home" user={user} open={open} chiudiModale={chiudiModale} />
+
     </Contenitore>
   );
 };

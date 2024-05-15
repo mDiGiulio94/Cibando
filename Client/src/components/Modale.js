@@ -128,12 +128,26 @@ const Modale = (props) => {
               </DialogContent>
 
               <DialogActions>
+                <Button onClick={props.invia} autoFocus variant="contained">
+                  Invia
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </Contenitore>
+        )}
+        {props.page === "logout" && (
+          <Contenitore>
+            <Dialog open={props.open} onClose={props.chiudiModale}>
+              <DialogTitle>
+                <div> Hai effettuato il logout con successo!</div>
+              </DialogTitle>
+           <DialogActions>
                 <Button
-                  onClick={props.invia}
+                  onClick={props.chiudiModale}
                   autoFocus
                   variant="contained"
                 >
-                  Invia
+                  Chiudi
                 </Button>
               </DialogActions>
             </Dialog>
