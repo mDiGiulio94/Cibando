@@ -10,12 +10,6 @@ import Modale from "../components/Modale";
 import RecipeApi from "../API/recipeAPI";
 
 const AggiunngiRicetta = () => {
-  const [description, setDescription] = useState();
-
-  const handleEditorChange = (event, value) => {
-    const data = value.getData();
-    setDescription(data);
-  };
 
   const [open, setOpen] = useState(false);
 
@@ -40,7 +34,6 @@ const AggiunngiRicetta = () => {
   const [formValues, setFormValues] = useState({
     nome: "",
     difficolta: "",
-    date: "",
     immagine: "",
     descrizione: "",
   });
@@ -79,6 +72,15 @@ const AggiunngiRicetta = () => {
       difficolta: event,
     });
   };
+
+const handleEditorChange = (event, value) => {
+  const data = value.getData();
+  setFormValues({
+    ...formValues,
+    descrizione: data,
+  });
+};
+
 
   //gestione degli errori
   const validazioneCampi = (evento) => {
@@ -171,25 +173,6 @@ const AggiunngiRicetta = () => {
                 {error.nome && <p className="help ">{error.nome}</p>}
               </div>
 
-              {/* Date */}
-
-              <label className="label" htmlFor="date1">
-                Inserisci la data di inserimento :
-              </label>
-
-              <Input
-                type="date"
-                name="date"
-                id="date"
-                className={`control ${error.date ? "errore" : ""}`}
-                value={formValues.date}
-                onChange={handleOnChange}
-                onBlur={validazioneCampi}
-              />
-              <div className="prova">
-                {error.date && <p className="help ">{error.date}</p>}
-              </div>
-
               {/* immagine */}
 
               <label className="label" htmlFor="immagine1">
@@ -212,7 +195,7 @@ const AggiunngiRicetta = () => {
               {/* SELECT */}
 
               <label className="label" htmlFor="difficolta1">
-                Inserisci la difficoltà
+                Inserisci la difficoltà:
               </label>
               <Select
                 defaultValue={"Scegli un campo"}
@@ -241,7 +224,7 @@ const AggiunngiRicetta = () => {
               <div className="descrizione">
                 <CKEditor
                   editor={ClassicEditor}
-                  data={description}
+                  data={formValues.descrizione}
                   onChange={handleEditorChange}
                 />
               </div>

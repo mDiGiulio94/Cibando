@@ -6,15 +6,20 @@ servono a passare informazioni da padre a figlio
 
 */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Pagination } from "@mui/material";
 import AppContext from "antd/es/app/context";
 import Modale from "./Modale";
 import DOMPurify from "dompurify";
+import { AuthContext } from "../auth/AuthContext";
+import RecipeApi from "../API/recipeAPI";
 
 const RecipeCard = (props) => {
+
+  const { isAuth, userRole } = useContext(AuthContext);
+
   //costante con pagina iniziale
   const [paginaCorrente, setPaginaCorrente] = useState(1);
 
@@ -76,6 +81,7 @@ const RecipeCard = (props) => {
     apriModale();
   }
 
+
   const apriModale = () => {
     setOpen(true);
   };
@@ -88,7 +94,7 @@ const RecipeCard = (props) => {
     <Contenitore>
       {props.pag === "ricette" && (
         <div>
-          Ricette visualizzate {indicePrimaRicetta + 1} a {indiceUltimaRicetta}{" "}
+          Ricette visualizzate {indicePrimaRicetta + 1} a {indiceUltimaRicetta}
           su un totale di {ricette.length} ricette
         </div>
       )}
@@ -125,9 +131,15 @@ const RecipeCard = (props) => {
                   }}
                 />
               </p>
+
               <Link to={`/dettaglio/${ricetta.title}/${ricetta._id}`}>
                 <button className="btn btn-primary">Visualizza</button>
               </Link>
+              {isAuth && userRole !== "user" && (
+                <Link to={`/modifica/${ricetta.title}/${ricetta._id}`}>
+                  <button className="btn btn-primary">Modifica</button>
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -192,11 +204,13 @@ if(descrizione.length >= lunghezzaMassima){
 const Contenitore = styled.div`
   background-color: white;
 
+
+
   .btn {
     border: none;
     background-color: #8e210b;
-    width: 50%;
-    margin-left: 25%;
+    width: 40%;
+   margin-left: 7%;
     margin-top: 5px;
     font-weight: 600;
     padding: 3%;
@@ -231,6 +245,10 @@ const Contenitore = styled.div`
       }
     }
   }
+
+
+
+
 `;
 
 export default RecipeCard;

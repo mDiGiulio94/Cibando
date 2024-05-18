@@ -10,6 +10,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
+import { Input } from "antd";
+
 
 const Modale = (props) => {
 
@@ -120,7 +122,6 @@ const Modale = (props) => {
                   <ul>
                     <li>{props.info?.nome}</li>
                     <li>{props.info?.difficolta}</li>
-                    <li>{props.info?.date}</li>
                     <li>{props.info?.immagine}</li>
                     <li>{props.info?.descrizione}</li>
                   </ul>
@@ -141,7 +142,7 @@ const Modale = (props) => {
               <DialogTitle>
                 <div> Hai effettuato il logout con successo!</div>
               </DialogTitle>
-           <DialogActions>
+              <DialogActions>
                 <Button
                   onClick={props.chiudiModale}
                   autoFocus

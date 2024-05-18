@@ -4,6 +4,7 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
 import PersonIcon from "@mui/icons-material/Person";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import EditIcon from "@mui/icons-material/Edit";
 import Logo from "../assets/images/icona-cibando.png";
 import { Link } from "react-router-dom";
 
@@ -71,13 +72,15 @@ const Header = () => {
                     <MenuBookIcon>Filled</MenuBookIcon> Ricette
                   </Link>
                 </li>
-                <li className="nav-item">
-                  {isAuth && (
-                    <Link to="/aggiungi" className="nav-link">
-                      <AddCircleIcon>Filled</AddCircleIcon> Aggiungi Ricetta
-                    </Link>
-                  )}
-                </li>
+                {isAuth && (
+                  <>
+                    <li className="nav-item">
+                      <Link to="/aggiungi" className="nav-link">
+                        <AddCircleIcon>Filled</AddCircleIcon> Aggiungi Ricetta
+                      </Link>
+                    </li>
+                  </>
+                )}
                 <li className="nav-item">
                   {!isAuth && (
                     <Link to="/registrazione" className="nav-link">
@@ -85,11 +88,15 @@ const Header = () => {
                     </Link>
                   )}
                 </li>
-                <li className="nav-item">
-                  <Link to="/contatti" className="nav-link">
-                    <MarkAsUnreadIcon>Filled</MarkAsUnreadIcon> Contatti
-                  </Link>
-                </li>
+
+                {!isAuth && (
+                  <li className="nav-item">
+                    <Link to="/contatti" className="nav-link">
+                      <MarkAsUnreadIcon>Filled</MarkAsUnreadIcon> Contatti
+                    </Link>
+                  </li>
+                )}
+
                 <li className="nav-item">
                   {!isAuth && (
                     <Link to="/login" className="nav-link">
@@ -112,7 +119,11 @@ const Header = () => {
                   </>
                 )}
               </ul>
-              <Modale page="logout" open={open} chiudiModale={chiudiModale}></Modale>
+              <Modale
+                page="logout"
+                open={open}
+                chiudiModale={chiudiModale}
+              ></Modale>
             </div>
           </div>
         </nav>

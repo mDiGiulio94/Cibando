@@ -47,7 +47,8 @@ const Recipes = () => {
        setOpen(true);
        console.log(error);
      }
-   }
+  }
+
   function titoloDalFiglio(data) {
     if (data !== titolo) {
       return setTitolo(data);

@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 //Elementi bootstrap
 import Card from "react-bootstrap/Card";
+import DOMPurify from "dompurify";
 
 
 const Dettaglio = ({ ricetta }) => {
@@ -31,15 +32,16 @@ const Dettaglio = ({ ricetta }) => {
 
 
   return (
+    // dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize() }}
     <Contenitore>
-<div
+      <div
         style={{ backgroundImage: `url(${ricetta?.image})` }}
         className="img"
       ></div>
       <Card>
         <Card.Body>
           <Card.Title>{ricetta?.title}</Card.Title>
-          <Card.Text>{ricetta?.description}</Card.Text>
+          <Card.Text dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(ricetta?.description) }}/>
         </Card.Body>
         <Card.Footer>
           <div className="row">

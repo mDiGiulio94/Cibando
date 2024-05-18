@@ -25,9 +25,25 @@ return response
 }
 
 
+
+
+//Put
+
+const modificaDetail = async (id, nuoviDati) => {
+  try {
+    const response = await axios.put(apiBaseUrl + id, nuoviDati)
+    return response
+
+  } catch (error) {
+    console.log(error)
+    return error
+  }
+}
+
 const UserApi = {
   insertUser: insertUser,
   getDetail: getDetail,
+  modificaDetail: modificaDetail
 };
 
 export default UserApi;

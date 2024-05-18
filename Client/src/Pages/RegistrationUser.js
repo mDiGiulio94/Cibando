@@ -221,7 +221,7 @@ const RegistrationUser = () => {
        setOpen(true);
      }
    } catch (error) {
-     
+
    }
 
    //passare al metodo tutti i valori del form

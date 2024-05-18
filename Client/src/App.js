@@ -17,6 +17,8 @@ import Contatti from "./Pages/Contatti";
 import AggiunngiRicetta from "./Pages/AggiungiRicetta";
 import Login from "./Pages/Login";
 import Profile from "./Pages/Profile";
+import ModificaRicetta from "./Pages/ModificaRicetta";
+import EditorUser from "./components/EditorUser";
 
 
 
@@ -43,6 +45,8 @@ function App() {
               <Route path="/registrazione" element={<RegistrationUser />} />
               <Route path="/contatti" element={<Contatti />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/modifica/:title/:id" element={<ModificaRicetta />} />
+             <Route path="modificaUser/:id" element={<EditorUser />} />
               {/* route protetta */}
               <Route
                 path="/aggiungi"
@@ -52,9 +56,14 @@ function App() {
                   </ProtectedRoutes>
                 }
               />
-              <Route path="/profilo" element ={
-                <ProtectedRoutesUser><Profile /></ProtectedRoutesUser>
-            } />
+              <Route
+                path="/profilo"
+                element={
+                  <ProtectedRoutesUser>
+                    <Profile />
+                  </ProtectedRoutesUser>
+                }
+              />
             </Routes>
             <Footer />
           </AuthProvider>

@@ -97,11 +97,27 @@ const postRecipe = async (dati) => {
   }
 }
 
+
+
+//modifica ricette
+
+const putRecipe = async (id, modifiche) => {
+  try {
+    const response = await axios.put(apiBaseUrl + id, modifiche)
+    return response;
+  } catch (error) {
+    console.log(error)
+    return error;
+  }
+
+}
+
 //siccome si avranno tante chiamate all'interno di questo file si può alla fine creare un oggetto contenente i vari metodi associando come chiave e valore lo stesso nome della chiamata che vogliamo richiamare, questo perché invece di fare tanti diversi export si usa un unico oggetto che li porta tutti quanti
 const RecipeApi = {
   getRecipes: getRecipes,
   getRecipe: getRecipe,
-  postRecipe: postRecipe
+  postRecipe: postRecipe,
+  putRecipe: putRecipe,
 };
 
 export default RecipeApi;
