@@ -79,29 +79,26 @@ const ModificaRicetta = () => {
   }
 
 
-
-
-
-  useEffect(() => {
     const getRicette = async () => {
       try {
-        const response = await RecipeApi.getRecipe(id)
+        const response = await RecipeApi.getRecipe(id);
         if (response) {
           setValori({
             nome: response.title,
             difficolta: response.difficulty,
             immagine: response.image,
-            descrizione: response.description
-          }
-          )
+            descrizione: response.description,
+          });
           console.log(response);
         }
       } catch (error) {
-        console.log(error)
-        return error
+        console.log(error);
+        return error;
       }
-    }
-    
+    };
+
+
+  useEffect(() => {
   getRicette()
   },[id])
 
